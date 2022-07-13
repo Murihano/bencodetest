@@ -2,18 +2,35 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block meta %}{% endblock %}
+        {#  App favicon  #}
+        <link rel="shortcut icon" href="{% block favicon %}{{ asset('build/logo-nestor-reduit.svg') }}{% endblock %}">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="crossorigin=""/>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+                <link href="{{ asset('/build/app-style.css') }}" rel="stylesheet" type="text/css" id="light-style" >
         {% endblock %}
-
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="loading" data-layout-color="light" data-layout-config='{"leftSideBarTheme" : "dark", "leftSidebarCondensed": false , "layoutBoxed":false, "leftSidebarScrollable":false, "darkMode":true, "showRightSidebarOnStart": false}' data-leftbar-theme="dark">
+    {% block content %}
+    {% endblock %}
+    {% block custom_js %}
+    {#  JS Variables  #}
+        <script>
+            {{var_js.set_var_js('csrf_token',csrf_token('csrf_token')) }}
+            {{var_js.set_var_js('conf_popup_mess_1','êtes-vous certain de vouloir faire ça ?'|trans|capitalize) }}
+            {{var_js.set_var_js('cancel','annuler'|trans|capitalize) }}
+            {{var_js.set_var_js('validate','valider'|trans|capitalize) }}
+            {{var_js.set_var_js('deleted','c\'est supprimé !'|trans|capitalize) }}
+            {{var_js.set_var_js('saved','C\'est  enregistré !'|trans|capitalize) }}
+            var $varJs = {{var_js.get_json|json_encode()|raw }};
+                $varJs = JSON.parse($varJs);
+        </script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="crossorigin=""></script>
+    {% endblock %}
     </body>
 </html>

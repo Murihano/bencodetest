@@ -1,0 +1,70 @@
+.field-table {
+    min-height: 23vh;
+}
+
+//map scss
+div[data-map="large-map"] {
+    height: 59vh;
+}
+
+div[data-map="mini-map"] {
+    height: 31.5em;
+    border : solid black 1px;
+}
+
+.thumbmail-modal
+{
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 125px;
+  height: auto;
+}
+
+.large-img-terrain-detail {
+  max-width: 25vw;
+}
+
+@media (max-width: 398px) {
+  .large-img-terrain-detail {
+    margin-bottom : 4em
+  }
+}
+
+.img-thumbnail-terrain {
+  max-width: 125px;
+}
+
+// pointer 
+.pointer {
+  cursor: pointer;
+}
+
+.right-panel-button {
+  display: none;
+}
+
+a[data-view]:hover::before {
+  content: attr(aria-label);
+  background: #eef2f7;
+  color: #313a46;
+  position: absolute;
+  top: -1.7em;
+  left: 50%;
+  padding: 0 5px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+a[data-color="secondary"]:hover::before {
+  content: attr(aria-label);
+  background:  #6c757d;
+  color: #fff;
+  position: absolute;
+  top: -1.7em;
+  left: 50%;
+  padding: 0 5px;
+  transform: translateX(-50%);
+  z-index: 1;
+}

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ophtazon{% endblock %}
+
+{% block content %}
+    <!-- Begin page -->
+    <div class="wrapper">
+        {% include '_aside.html.twig' %}
+        <div class="content-page">
+            <div class="content">
+                <!-- Topbar Start -->
+                {% include '_top.html.twig' %}
+                <!-- end Topbar -->
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb mb-0">
+                                        {# {% if breadcrumb is defined %}
+                                            {% for item in breadcrumb %}
+                                                <li class="breadcrumb-item {{ item == breadcrumb|last ? 'active aria-current="page"' : '' }}">
+                                                {% if item.href %}
+                                                    <a href="{{ path(item.href) }}"><i class="{{ item.icon }}"></i>{{ item.label|trans|capitalize }}</a>
+                                                {% else %}
+                                                    <i class="{{ item.icon }}"></i>{{ ucWords(item.label)|trans }}
+                                                {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %} #}
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">{% block page_title %}{% endblock %}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div id="alert-area">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success alert-dismissible  border-0 fade show popup-notification" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {{ message|raw}}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('update') %}
+                        <div class="alert alert-warning alert-dismissible  border-0 fade show popup-notification" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {{ message|raw}}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('delete') %}
+                        <div class="alert alert-danger alert-dismissible border-0 fade show popup-notification" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {{ message|raw}}
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <!-- end page title -->
+                    <div class="start-page-content">
+                        {% block page_content %}
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content here -->
+                            <!-- ============================================================== -->
+                        {% endblock %}
+                    </div>
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ "now"|date("Y") }} © Ophtazon - Mandat de vente
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+{% endblock %}

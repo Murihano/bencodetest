@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<body class="authentication-bg pb-0">
+    <div class="auth-fluid">
+        <!--Auth fluid left content -->
+        <div class="auth-fluid-form-box">
+            <div class="align-items-center d-flex h-100">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="w-75 auth-brand text-lg-center">
+                        <a href="#" class="logo-dark d-block">
+                            <span>
+                                <a href="{{ path('login') }}" class="text-muted ms-1">
+                                    <img src="{{ asset('build/logo-nestor-noir.svg') }}" alt="logo-synermi" height="45">
+                                </a>
+                            </span>
+                        </a>
+                    </div>
+                    {% block login_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

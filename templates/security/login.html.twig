@@ -1,0 +1,67 @@
+{% extends '_base_login.html.twig' %}
+
+{% block title %}{{ 'connexion'|trans|capitalize }}{% endblock %}
+
+{% block login_content %}
+<div class="mt-5">
+{% for flashError in app.flashes('reset_password_error') %}
+    <div class="alert alert-danger alert-dismissible  border-0 fade show popup-notification text-break" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{ flashError|raw }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('reset_password_success') %}
+    <div class="alert alert-success alert-dismissible  border-0 fade show popup-notification text-break" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{ message }}
+    </div>
+{% endfor %}
+{% for category, messageKey in app.flashes %}
+    {% for message in messageKey %}
+        <div class="alert alert-{{ category }}">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<!-- title-->
+    <h4 class="mt-0">{{ 'se connecter'|trans|capitalize }}</h4>
+    <p class="text-muted mb-4">{{ 'entrez votre adresse e-mail et votre mot de passe pour accéder au compte'|trans|capitalize }}</p>
+
+    <div class="tab-content">
+        <form action="{{ path('login') }}" method="post">
+            <div class="mb-3">
+                <label class="form-label" for="validationCustomUsername">{{ 'email'|trans|capitalize }}</label>
+                <div class="input-group">
+                    <input type="email" class="form-control {{ (error) ? "is-invalid" : ""}}" id="_username"  name="_username"  value="{{ last_username }}"  placeholder="{{ 'email'|trans|capitalize }}" aria-describedby="inputGroupPrepend" required autocomplete="email" >
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">{{ 'mot de passe'|trans|capitalize }}</label>
+                <div class="input-group" id="show_hide_password">
+                    <div class="input-group input-group-merge">
+                        <input type="password" id="password" name="_password" class="form-control {{ (error) ? "is-invalid" : ""}}" placeholder="{{ 'mot de passe'|trans|capitalize }}" required autocomplete="current-password" >
+                        <div class="input-group-text" data-password="false">
+                            <span class="password-eye"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox-signin">
+                    <label class="form-check-label" for="checkbox-signin">{{ 'se souvenir de moi'|trans|capitalize }}</label>
+                </div>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_target_path" value="{{ path('home') }}"/>
+            <div class="d-grid mb-0 text-center">
+                <button class="btn btn-primary" type="submit"><i class="mdi mdi-login"></i>{{ 'connexion'|trans|capitalize }}</button>
+            </div>
+            {# <div class="mt-3 text-center">
+                <a href="{{ path('password_reset_request') }}">{{ 'mot de passse oublié ?'|trans|capitalize }}</a>
+            </div> #}
+        </form>
+    </div>
+</div>
+<!-- end form-->
+{% endblock %}
