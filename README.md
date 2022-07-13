@@ -8,8 +8,9 @@
 ### Install
 
 1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
+2. Switch to branch dev
+3. Run `composer install`
+4. Run `yarn install`
 
 ### Working
 
